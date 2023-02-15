@@ -15,6 +15,11 @@ export const GlobalStyle = createGlobalStyle<{ theme: themeType }>`
   }
 
   body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
     background-color: ${({ theme }) => theme.darkBlue};
     color: ${({ theme }) => theme.lightCyan};
     font-size: 1.5rem;
