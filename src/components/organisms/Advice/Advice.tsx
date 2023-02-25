@@ -12,13 +12,17 @@ const initialAdvice = {
 
 const Adivice = () => {
 	const [advice, setAdvice] = useState<adviceType>(initialAdvice);
+	const [isError, setIsError] = useState(false);
 
 	const fetchAdvice = async () => {
 		const response = await fetch('https://api.adviceslip.com/advice');
-		const json = await response.json();
+		const data = await response.json();
 
 		if (response.ok) {
-			setAdvice(json.slip);
+			setIsError(false);
+			setAdvice(data.slip);
+		} else {
+			setIsError(true);
 		}
 	};
 
@@ -28,8 +32,15 @@ const Adivice = () => {
 
 	return (
 		<Wrapper>
-			<AdviceNumber>Advice #{advice?.id}</AdviceNumber>
-			<AdviceMessage>{advice?.advice}</AdviceMessage>
+			{!isError ? (
+				<>
+					{' '}
+					<AdviceNumber>Advice #{advice.id}</AdviceNumber>
+					<AdviceMessage>{advice.advice}</AdviceMessage>
+				</>
+			) : (
+				<p>Sorry, advice not found. Try later!</p>
+			)}
 			<img src={dividerMobile} srcSet={`${dividerMobile} 1024w, ${dividerDesktop} 1920w`} alt='divider' />
 			<DiceWrapper onClick={handleGetAdvice}>
 				<Icon />

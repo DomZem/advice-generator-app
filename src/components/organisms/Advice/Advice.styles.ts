@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.main`
 	position: relative;
 	max-width: 468px;
 	display: flex;
